@@ -50,7 +50,7 @@ var q = {
         return el;
     },
     id: function (id) {
-        return document.getElementById(a);
+        return document.getElementById(id);
     },
     s: function (a, e) {
         return (e || document).querySelector(a);
