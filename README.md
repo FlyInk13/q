@@ -1,10 +1,10 @@
-# q - Создавай, ищи обрабатывай элементы DOM в 3 символа
+# q - Создавай, ищи и брабатывай элементы DOM в 3 символа
 
 ## ищем и обрабатываем 
 ```js
-q.s(q) = document.querySelector(q)
-q.sa(q, e) = e.querySelectorAll(q)
-q.sac(q, cb) = [].map.call(document.querySelectorAll(q), cb)
+q.s(q) = document.querySelector(q);
+q.sa(q, e) = e.querySelectorAll(q);
+q.sac(q, cb) = [].map.call(document.querySelectorAll(q), cb);
 ```
 ## q.ce - создаем и вкладываем
 ```js
