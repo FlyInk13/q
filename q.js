@@ -1,4 +1,13 @@
 var q = {
+    s2o: function (s) {
+        if(!/^(.+?)(?:\#(.+?))?(?:\.(.+))?$/.test(s)) return {tagName: s};
+        s = s.match(/^(.+?)(?:\#(.+?))?(?:\.(.+))?$/);
+        return {
+            tagName: s[1],
+            id: s[2] || "",
+            className: s[3] || ""
+        };
+    },
     a: function (e, d) {
         for (var n in d)
             if (d.hasOwnProperty(n))
@@ -9,32 +18,24 @@ var q = {
         var el, data, nodes = false,
             i = -1,
             a = arguments;
-        if (a.length < 2) {
+        if (!a.length || !a[0]) {
             el = document.createDocumentFragment();
             nodes = a[0];
-        } else if (a.length == 2) {
-            a[0] = a[0].match(/^(.+?)(?:\#(.+?))?(?:\.(.+))?$/);
-            el = document.createElement(a[0][1]);
+        } else if (a.length < 3) {
+            a[0] = q.s2o(a[0]);
+            el = document.createElement(a[0].tagName);
             if (Array.isArray(a[1])) {
                 nodes = a[1];
             } else if (typeof a[1] == "string") {
-                data = {
-                    textContent: a[1]
-                };
+                a[0].textContent = a[1];
             } else {
                 data = a[1];
             }
-            data = q.a({
-                id: a[0][2] || "",
-                className: a[0][3] || ""
-            }, data);
+            data = q.a(a[0], data);
         } else {
-            a[0] = a[0].match(/^(.+?)(?:\#(.+?))?(?:\.(.+))?$/);
-            el = document.createElement(a[0][1]);
-            data = q.a({
-                id: a[0][2] || null,
-                className: a[0][3] || null
-            }, a[1]);
+            a[0] = q.s2o(a[0]);
+            el = document.createElement(a[0].tagName);
+            data = q.a(a[0], a[1]);
             nodes = a[2];
         }
 
